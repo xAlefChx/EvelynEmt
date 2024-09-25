@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Evelyn.Application\Evelyn.Application.csproj" />
+    <ProjectReference Include="..\Evelyn.Domain\Evelyn.Domain.csproj" />
+    <ProjectReference Include="..\Evelyn.Infrastructure\Evelyn.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
