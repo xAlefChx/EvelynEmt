@@ -27,14 +27,14 @@ namespace Evelyn.Application.Controller
             _userServices = userService;
         }
 
-        [HttpGet(nameof(GetAllUsers))]
+        [HttpGet("All")]
         public async Task<IActionResult> GetAllUsers()
         {
             var users = await _userServices.GetAllUsersAsync();
             return Ok(users);
         }
 
-        [HttpGet("{id}/" + nameof(GetUserById))]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(Guid id)
         {
             var user = await _userServices.GetUserByIdAsync(id);
@@ -46,7 +46,7 @@ namespace Evelyn.Application.Controller
             return Ok(user);
         }
 
-        [HttpPost(nameof(AddUser))]
+        [HttpPost]
         public async Task<IActionResult> AddUser([FromBody] AddUserRequest user)
         {
             if (!ModelState.IsValid)
@@ -58,12 +58,12 @@ namespace Evelyn.Application.Controller
             return CreatedAtAction(nameof(AddUser), new { id = newUser.Id }, newUser);
         }
 
-        [HttpPut("{id}" + nameof(UpdateUser))]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(Guid id, UpdateUserRequest user)
         {
             try
             {
-                var updatedUser = await _userServices.UpdateUserAsync( id ,user);
+                var updatedUser = await _userServices.UpdateUserAsync(id, user);
                 return Ok(updatedUser);
             }
             catch (DbUpdateConcurrencyException)
@@ -77,7 +77,7 @@ namespace Evelyn.Application.Controller
             }
         }
 
-        [HttpDelete("{id}" + nameof(DeleteUser))]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
             var result = await _userServices.DeleteUserAsync(id);
@@ -89,7 +89,7 @@ namespace Evelyn.Application.Controller
             return NoContent();
         }
 
-        [HttpPost(nameof(AddUserRole))]
+        [HttpPost("roles")]
         public async Task<IActionResult> AddUserRole([FromBody] AddUserRoleRequest user)
         {
             if (!ModelState.IsValid)
@@ -101,7 +101,7 @@ namespace Evelyn.Application.Controller
             return CreatedAtAction(nameof(AddUserRole), new { id = newUser.Id }, newUser);
         }
 
-        [HttpDelete("{id}" + nameof(DeleteUserRole))]
+        [HttpDelete("roles/{id}")]
         public async Task<IActionResult> DeleteUserRole(Guid id)
         {
             var result = await _userServices.DeleteUserRoleAsync(id);

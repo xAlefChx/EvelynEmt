@@ -22,7 +22,7 @@ namespace Evelyn.Application.Controller
         }
 
 
-        [HttpGet  (nameof(GetProductById))]
+        [HttpGet]
         public async Task<IActionResult> GetProductById(int productid)
         {
             var product = await _productServices.GetProductByIdAsync(productid);
@@ -34,7 +34,7 @@ namespace Evelyn.Application.Controller
             return Ok(product);
         }
 
-        [HttpPost(nameof(CreateProduct))]
+        [HttpPost]
         public async Task<IActionResult> CreateProduct(AddProductRequest product)
         {
             if (!ModelState.IsValid)
@@ -46,7 +46,7 @@ namespace Evelyn.Application.Controller
             return CreatedAtAction(nameof(CreateProduct), new { id = newProduct.Id }, newProduct);
         }
 
-        [HttpPut("{productid}" + nameof(UpdateProductAsync))]
+        [HttpPut]
         public async Task<IActionResult> UpdateProductAsync(int productid, UpdateProductRequest request)
         {
             try
@@ -65,7 +65,7 @@ namespace Evelyn.Application.Controller
             }
         }
 
-        [HttpDelete("{id}" + nameof(DeleteProductAsync))]
+        [HttpDelete]
         public async Task<IActionResult> DeleteProductAsync(int id)
         {
             var result = await _productServices.DeleteProductAsync(id);

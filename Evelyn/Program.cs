@@ -5,9 +5,8 @@ using Evelyn.Web.Configurations;
 using Evelyn.Web.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddControllers()
-    .AddJsonOptions(Options=> Options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+    .AddJsonOptions(Options => Options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 builder.Services.AddEvelynDbContext(builder.Configuration);
 builder.Services.AddCustomSwagger();
 builder.Services
@@ -25,4 +24,10 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-app.Run();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+
+await app.RunAsync();

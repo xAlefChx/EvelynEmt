@@ -1,27 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Evelyn.Domain.Entities.Configurations
+namespace Evelyn.Domain.Entities.Configurations;
+
+public class UserConfigurations : IEntityTypeConfiguration<User>
 {
-    public class UserConfigurations : IEntityTypeConfiguration<User>
+    public void Configure(EntityTypeBuilder<User> builder)
     {
-        public void Configure(EntityTypeBuilder<User> builder)
-        {
-            builder.HasKey(c => c.Id);
-            builder.Property(c => c.ParentUserId).IsRequired(false);
-            builder.Property(c => c.Name).IsRequired().HasMaxLength(100);
-            builder.Property(c => c.PhoneNumber).IsRequired().HasMaxLength(11);
-            builder.Property(c => c.CoinScore).IsRequired();
-            builder.Property(c => c.Role).IsRequired();
-            builder.HasMany(c => c.Addresses).WithOne(a => a.User)
-                   .HasForeignKey(a => a.UserId)
-                   .OnDelete(DeleteBehavior.NoAction);
-            builder.HasMany(c => c.UserProjects).WithOne(c => c.User);
-        }
+        builder.HasKey(c => c.Id);
+        builder.Property(c => c.ParentUserId).IsRequired(false);
+        builder.Property(c => c.Name).IsRequired().HasMaxLength(100);
+        builder.Property(c => c.PhoneNumber).IsRequired().HasMaxLength(11);
+        builder.Property(c => c.CoinScore).IsRequired();
+        builder.Property(c => c.Role).IsRequired();
+        builder.HasMany(c => c.Addresses).WithOne(a => a.User)
+               .HasForeignKey(a => a.UserId)
+               .OnDelete(DeleteBehavior.NoAction);
+        builder.HasMany(c => c.UserProjects).WithOne(c => c.User);
     }
 }

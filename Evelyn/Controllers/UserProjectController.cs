@@ -21,7 +21,7 @@ namespace Evelyn.Application.Controller
             _userProjectServices = userProjectServices;
         }
 
-        [HttpGet("{userprojectid}" + nameof(GetUserProjectByIdAsync))]
+        [HttpGet]
         public async Task<IActionResult> GetUserProjectByIdAsync(int userprojectid)
         {
             var userproject = await _userProjectServices.GetUserProjectByIdAsync(userprojectid);
@@ -33,7 +33,7 @@ namespace Evelyn.Application.Controller
             return Ok(userproject);
         }
 
-        [HttpGet (nameof(GetAllUserProjectsByIdAsync))]
+        [HttpGet("All")]
         public async Task<IActionResult> GetAllUserProjectsByIdAsync(Guid id)
         {
             var userproject = await _userProjectServices.GetAllUserProjectsByIdAsync(id);
@@ -45,7 +45,7 @@ namespace Evelyn.Application.Controller
             return Ok(userproject);
         }
 
-        [HttpPost(nameof(CreateUserProject))]
+        [HttpPost]
         public async Task<IActionResult> CreateUserProject([FromBody]AddUserProjectRequest request)
         {
             if (!ModelState.IsValid)
@@ -57,7 +57,7 @@ namespace Evelyn.Application.Controller
             return CreatedAtAction(nameof(CreateUserProject), new { id = newUserProject.Id }, newUserProject);
         }
 
-        [HttpPut("{userprojectid}" + nameof(UpdateUserProjectAsync))]
+        [HttpPut]
         public async Task<IActionResult> UpdateUserProjectAsync(int userprojectid, [FromBody] UpdateUserProjectRequest request)
         {
             try
@@ -76,7 +76,7 @@ namespace Evelyn.Application.Controller
             }
         }
 
-        [HttpDelete("{userprojectid}" + nameof(DeleteUserProjectByIdAsync))]
+        [HttpDelete]
         public async Task<IActionResult> DeleteUserProjectByIdAsync(int userprojectid)
         {
             var result = await _userProjectServices.DeleteUserProjectByIdAsync(userprojectid);

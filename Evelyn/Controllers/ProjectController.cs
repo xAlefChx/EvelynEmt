@@ -18,7 +18,7 @@ namespace Evelyn.Application.Controller
             _projectServices = projectServices;
         }
 
-        [HttpGet("{id}" + nameof(GetProjectById))]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetProjectById(int id)
         {
             var project = await _projectServices.GetProjectByIdAsync(id);
@@ -30,7 +30,7 @@ namespace Evelyn.Application.Controller
             return Ok(project);
         }
 
-        [HttpPost (nameof(CreateProject))]
+        [HttpPost]
         public async Task<IActionResult> CreateProject(AddProjectRequest project)
         {
             if (!ModelState.IsValid)
@@ -42,7 +42,7 @@ namespace Evelyn.Application.Controller
             return CreatedAtAction(nameof(CreateProject), new { id = newProject.Id }, newProject);
         }
 
-        [HttpPut("{id}" + nameof(UpdateProject))]
+        [HttpPut]
         public async Task<IActionResult> UpdateProject(int id, UpdateProjectRequest project)
         {
             try
@@ -61,7 +61,7 @@ namespace Evelyn.Application.Controller
             }
         }
 
-        [HttpDelete("{id}" + nameof(DeleteProject))]
+        [HttpDelete]
         public async Task<IActionResult> DeleteProject(int id)
         {
             var result = await _projectServices.DeleteProjectAsync(id);
@@ -73,7 +73,7 @@ namespace Evelyn.Application.Controller
             return NoContent();
         }
 
-        [HttpGet (nameof(GetAllProjectProductsByIdAsync))]
+        [HttpGet("All")]
         public async Task<IActionResult> GetAllProjectProductsByIdAsync(int projectid)
         {
             var products = await _projectServices.GetAllProjectProductsByIdAsync(projectid);
@@ -85,7 +85,7 @@ namespace Evelyn.Application.Controller
             return Ok(products);
         }
 
-        [HttpGet(nameof(GetAddressByProjectIdAsync))]
+        [HttpGet("Address")]
         public async Task<IActionResult> GetAddressByProjectIdAsync(int projectid)
         {
             var address = await _projectServices.GetAddressByProjectIdAsync(projectid);

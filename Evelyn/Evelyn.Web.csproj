@@ -23,7 +23,6 @@
     <ProjectReference Include="..\Evelyn.Application\Evelyn.Application.csproj" />
     <ProjectReference Include="..\Evelyn.Domain\Evelyn.Domain.csproj" />
     <ProjectReference Include="..\Evelyn.Infrastructure\Evelyn.Infrastructure.csproj" />
-    <ProjectReference Include="..\Evelyn.Presentation\Evelyn.Presentation.csproj" />
   </ItemGroup>
 
 </Project>
